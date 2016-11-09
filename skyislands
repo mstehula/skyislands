@@ -1,4 +1,3 @@
-
 -- Forward Declarations
 
 -- Private Interface
@@ -44,15 +43,15 @@ local function generate(radius, height, slant)
         slope = height/(radius*radius)
         distance = math.sqrt((i*i) + (j*j))
         base[i][j] = math.floor(slope*(distance-radius)*(distance+radius))
+      elseif slant == "tordial" then
+        slope = height/(radius*radius*(radius/2)*(radius/2))
+        distance = math.sqrt((i*i) + (j*j))
+        base[i][j] = math.floor(slope*(distance-radius)*(distance+radius)*(distance+(radius/2))*(distance-(radius/2)))
       else
         slope = radius/height
         distance = math.sqrt((i*i) + (j*j))
         base[i][j] = math.floor(distance/slope - height)
       end
-
-      slope = height/(radius*radius)
-      distance = math.sqrt((i*i) + (j*j))
-      base[i][j] = math.floor(slope*(distance-radius)*(distance+radius))
 
 --[[
       if base[i][j] <= -10 then
